@@ -112,4 +112,14 @@ HSD.test(df.aov,"Learner",console = TRUE)
 While that works it isn't very pretty, so we have done the work for you in reformating this in a presentable format
 with the HSDTable method from our **faudmutils* package.
 
+```{r, results='asis'}
+HSDTable(df.aov)
+```
+
+But we only wanted to do it by learner.  No problem...
+
+```{r, results='asis'}
+HSDTable(df.aov,which="Learner")
+```
+
 
