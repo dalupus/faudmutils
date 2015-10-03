@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Michael Crawford" />
+
+<meta name="date" content="2015-10-03" />
+
+<title>Sample Data Analysis with faudmutils Package</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Sample Data Analysis with faudmutils Package</h1>
+<h4 class="author"><em>Michael Crawford</em></h4>
+<h4 class="date"><em>2015-10-03</em></h4>
+</div>
+
+
+<p>This is a sample of how to use the <strong>faudmutils</strong> package.<br />
+We will take a sample output file from a datamining request and load it into R.<br />
+Then some basic statistical analysis wil be performed on the file.</p>
+<p>First we need to load the relevant packages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
+<span class="kw">library</span>(faudmutils)
+<span class="kw">library</span>(RWeka)
+<span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(dplyr))
+<span class="kw">library</span>(xtable)
+<span class="kw">library</span>(agricolae)</code></pre></div>
+<p>Now we simply take our results file and pass it into mapKeys in order to get usable dataframe of the results.</p>
+<p>First we are going to find the location of our datafile.<br />
+<em>You will not need to do this step since you know the loaction of your file. This is simply a way to identify the location of the sample data in your local R install</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zipfile &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;newreview-wordvector-output.zip&quot;</span>,<span class="dt">package=</span><span class="st">&quot;faudmutils&quot;</span>)</code></pre></div>
+<p>zipfile now has the location of the zip file which contains the results of the data mining experiment. Note that there is no reason to actually unzip the results. R will grab the data directly out of the zipfile (How cool is that?)</p>
+<p>Now we have what we need to do our initial mapping. We need to call <strong>mapKeys</strong> from the <strong>faudmutils</strong> package.<br />
+This will default to loading the data from the <code>output/normal/output2.arff</code> file in the zipfile</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">mapKeys</span>(zipfile)</code></pre></div>
+<p>Now everything has been mapped to a human readable format!!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(df$Learner)  <span class="co"># Learner names are now human readible</span></code></pre></div>
+<pre><code>## [1] &quot;Logistic_Regression&quot; &quot;RBF_Network&quot;         &quot;C4.5&quot;               
+## [4] &quot;Naive_Bayes&quot;         &quot;C4.5_Original&quot;       &quot;MLP&quot;                
+## [7] &quot;5-NN&quot;                &quot;SVM&quot;                 &quot;Random_Forest_(100)&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(df$Dataset) <span class="co">#  No more dataset numbers</span></code></pre></div>
+<pre><code>## [1] &quot;reviewSpamData-string-doctor.arff&quot;    
+## [2] &quot;reviewSpamData-string-restaurant.arff&quot;
+## [3] &quot;reviewSpamData-string-hotel.arff&quot;</code></pre>
+<p>While the Dataset column is surely much better than numbers, in our particular case we can make it even better.<br />
+since each dataset represents a domain we will change those to even better names with the <a href="http://www.inside-r.org/packages/cran/plyr/docs/revalue">revalue</a> function from the plyr package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df$Dataset &lt;-<span class="st"> </span>plyr::<span class="kw">revalue</span>(df$Dataset,<span class="kw">c</span>(<span class="st">&quot;reviewSpamData-string-hotel.arff&quot;</span>=<span class="st">&quot;hotel&quot;</span>,
+                                           <span class="st">&quot;reviewSpamData-string-restaurant.arff&quot;</span>=<span class="st">&quot;restraunt&quot;</span>,
+                                           <span class="st">&quot;reviewSpamData-string-doctor.arff&quot;</span>=<span class="st">&quot;doctor&quot;</span>))
+<span class="kw">table</span>(df$Dataset)</code></pre></div>
+<pre><code>## 
+##    doctor     hotel restraunt 
+##       180       180       180</code></pre>
+<p>Now lets use the <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">dplyr package</a> to sample out 10 random rows and select a few key columns to examine. We then pass that into the <a href="http://www.inside-r.org/packages/cran/knitr/docs/kable">kable function</a> which produces a nice stylized output.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sampledDF &lt;-<span class="st"> </span><span class="kw">sample_n</span>(df,<span class="dv">10</span>)
+sampledDF &lt;-<span class="st"> </span><span class="kw">select</span>(sampledDF,Dataset,SamplingTechnique,WordsToKeep,Learner,AUC)
+<span class="kw">kable</span>(sampledDF,<span class="dt">row.names =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Dataset</th>
+<th align="left">SamplingTechnique</th>
+<th align="left">WordsToKeep</th>
+<th align="left">Learner</th>
+<th align="right">AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">restraunt</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">Random_Forest_(100)</td>
+<td align="right">0.932813</td>
+</tr>
+<tr class="even">
+<td align="left">restraunt</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">Random_Forest_(100)</td>
+<td align="right">0.935313</td>
+</tr>
+<tr class="odd">
+<td align="left">hotel</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">C4.5</td>
+<td align="right">0.778313</td>
+</tr>
+<tr class="even">
+<td align="left">restraunt</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">MLP</td>
+<td align="right">0.771250</td>
+</tr>
+<tr class="odd">
+<td align="left">hotel</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">Logistic_Regression</td>
+<td align="right">0.873105</td>
+</tr>
+<tr class="even">
+<td align="left">doctor</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">RBF_Network</td>
+<td align="right">0.660739</td>
+</tr>
+<tr class="odd">
+<td align="left">doctor</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">Logistic_Regression</td>
+<td align="right">0.837148</td>
+</tr>
+<tr class="even">
+<td align="left">restraunt</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">SVM</td>
+<td align="right">0.897500</td>
+</tr>
+<tr class="odd">
+<td align="left">hotel</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">Naive_Bayes</td>
+<td align="right">0.865133</td>
+</tr>
+<tr class="even">
+<td align="left">doctor</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">Logistic_Regression</td>
+<td align="right">0.922887</td>
+</tr>
+</tbody>
+</table>
+<p>Ok so we have our data now what? Let’s do some analysis!!!</p>
+<p>First we should probably do an ANOVA test. Well this is super easy in R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df.aov &lt;-<span class="st"> </span><span class="kw">aov</span>(AUC ~<span class="st"> </span>Dataset*Learner,df)
+<span class="kw">summary</span>(df.aov)</code></pre></div>
+<pre><code>##                  Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+## Dataset           2  0.053  0.0264   6.248 0.00208 ** 
+## Learner           8  3.933  0.4916 116.308 &lt; 2e-16 ***
+## Dataset:Learner  16  1.118  0.0699  16.531 &lt; 2e-16 ***
+## Residuals       513  2.168  0.0042                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>Well that looks ok, but what if we instead want a nice table. well we can use the <a href="https://cran.r-project.org/web/packages/xtable/xtable.pdf">xtable</a> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">xtable</span>(df.aov),<span class="dt">type=</span><span class="st">&quot;html&quot;</span>)</code></pre></div>
+<!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
+<!-- Sat Oct 03 17:03:04 2015 -->
+<table border="1">
+<tr>
+<th>
+</th>
+<th>
+Df
+</th>
+<th>
+Sum Sq
+</th>
+<th>
+Mean Sq
+</th>
+<th>
+F value
+</th>
+<th>
+Pr(&gt;F)
+</th>
+</tr>
+<tr>
+<td>
+Dataset
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+0.05
+</td>
+<td align="right">
+0.03
+</td>
+<td align="right">
+6.25
+</td>
+<td align="right">
+0.0021
+</td>
+</tr>
+<tr>
+<td>
+Learner
+</td>
+<td align="right">
+8
+</td>
+<td align="right">
+3.93
+</td>
+<td align="right">
+0.49
+</td>
+<td align="right">
+116.31
+</td>
+<td align="right">
+0.0000
+</td>
+</tr>
+<tr>
+<td>
+Dataset:Learner
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+1.12
+</td>
+<td align="right">
+0.07
+</td>
+<td align="right">
+16.53
+</td>
+<td align="right">
+0.0000
+</td>
+</tr>
+<tr>
+<td>
+Residuals
+</td>
+<td align="right">
+513
+</td>
+<td align="right">
+2.17
+</td>
+<td align="right">
+0.00
+</td>
+<td align="right">
+</td>
+<td align="right">
+</td>
+</tr>
+</table>
+<p>You could even generate latex (you do use latex don’t you?) for your report.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">xtable</span>(df.aov),<span class="dt">type=</span><span class="st">&quot;latex&quot;</span>)</code></pre></div>
+<pre><code>## % latex table generated in R 3.2.2 by xtable 1.7-4 package
+## % Sat Oct 03 17:03:04 2015
+## \begin{table}[ht]
+## \centering
+## \begin{tabular}{lrrrrr}
+##   \hline
+##  &amp; Df &amp; Sum Sq &amp; Mean Sq &amp; F value &amp; Pr($&gt;$F) \\ 
+##   \hline
+## Dataset &amp; 2 &amp; 0.05 &amp; 0.03 &amp; 6.25 &amp; 0.0021 \\ 
+##   Learner &amp; 8 &amp; 3.93 &amp; 0.49 &amp; 116.31 &amp; 0.0000 \\ 
+##   Dataset:Learner &amp; 16 &amp; 1.12 &amp; 0.07 &amp; 16.53 &amp; 0.0000 \\ 
+##   Residuals &amp; 513 &amp; 2.17 &amp; 0.00 &amp;  &amp;  \\ 
+##    \hline
+## \end{tabular}
+## \end{table}</code></pre>
+<p>If you add a file option to the print command (<code>print(xtable(df.aov),type=&quot;latex&quot;,file=&quot;anovatable.tex&quot;)</code>) it will write the latex directly to a file which you can include in your latex report with <code>\input{filename.tex}</code> command.</p>
+<p>Great but what about those Tukey test tables? Well we have a few functions to help you out there as well.</p>
+<p>First lets do a Tukey HSD test of Learner across all datasets.<br />
+We will use the <a href="http://www.inside-r.org/packages/cran/agricolae/docs/HSD.test">HSD.test</a> function from the agricolae package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">HSD.test</span>(df.aov,<span class="st">&quot;Learner&quot;</span>,<span class="dt">console =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## 
+## Study: df.aov ~ &quot;Learner&quot;
+## 
+## HSD Test for AUC 
+## 
+## Mean Square Error:  0.004226521 
+## 
+## Learner,  means
+## 
+##                           AUC        std  r      Min      Max
+## 5-NN                0.6743636 0.07852836 60 0.566725 0.856875
+## C4.5                0.7241471 0.06718305 60 0.557042 0.838750
+## C4.5_Original       0.6728424 0.06987751 60 0.450528 0.807500
+## Logistic_Regression 0.8149670 0.10867298 60 0.564482 0.952817
+## MLP                 0.7849466 0.13617023 60 0.164375 0.910000
+## Naive_Bayes         0.9002015 0.02665921 60 0.843125 0.963750
+## Random_Forest_(100) 0.9026728 0.02536102 60 0.826042 0.945625
+## RBF_Network         0.7194662 0.09030411 60 0.493125 0.839207
+## SVM                 0.8538769 0.03417506 60 0.768750 0.939375
+## 
+## alpha: 0.05 ; Df Error: 513 
+## Critical Value of Studentized Range: 4.405397 
+## 
+## Honestly Significant Difference: 0.03697439 
+## 
+## Means with the same letter are not significantly different.
+## 
+## Groups, Treatments and means
+## a     Random_Forest_(100)     0.9027 
+## a     Naive_Bayes             0.9002 
+## b     SVM                     0.8539 
+## c     Logistic_Regression     0.815 
+## c     MLP                     0.7849 
+## d     C4.5                    0.7241 
+## d     RBF_Network             0.7195 
+## e     5-NN                    0.6744 
+## e     C4.5_Original           0.6728</code></pre>
+<p>While that works it isn’t very pretty, so we have done the work for you in reformating this in a presentable format with the HSDTable method from our **faudmutils* package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">HSDTable</span>(df.aov)</code></pre></div>
+<!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
+<!-- Sat Oct 03 17:03:04 2015 -->
+<table border="1">
+<caption align="bottom">
+Tukey HSD Test
+</caption>
+<tr>
+<th>
+</th>
+<th>
+Dataset:Learner
+</th>
+<th>
+Group
+</th>
+<th>
+AUC
+</th>
+<th>
+stdev
+</th>
+</tr>
+<tr>
+<td align="right">
+1
+</td>
+<td>
+restraunt:Naive_Bayes
+</td>
+<td>
+a
+</td>
+<td align="right">
+0.917
+</td>
+<td align="right">
+0.032
+</td>
+</tr>
+<tr>
+<td align="right">
+2
+</td>
+<td>
+hotel:Random_Forest_(100)
+</td>
+<td>
+a
+</td>
+<td align="right">
+0.911
+</td>
+<td align="right">
+0.016
+</td>
+</tr>
+<tr>
+<td align="right">
+3
+</td>
+<td>
+restraunt:Random_Forest_(100)
+</td>
+<td>
+a
+</td>
+<td align="right">
+0.909
+</td>
+<td align="right">
+0.026
+</td>
+</tr>
+<tr>
+<td align="right">
+4
+</td>
+<td>
+doctor:Naive_Bayes
+</td>
+<td>
+ab
+</td>
+<td align="right">
+0.895
+</td>
+<td align="right">
+0.017
+</td>
+</tr>
+<tr>
+<td align="right">
+5
+</td>
+<td>
+hotel:Naive_Bayes
+</td>
+<td>
+abc
+</td>
+<td align="right">
+0.889
+</td>
+<td align="right">
+0.021
+</td>
+</tr>
+<tr>
+<td align="right">
+6
+</td>
+<td>
+doctor:Random_Forest_(100)
+</td>
+<td>
+abc
+</td>
+<td align="right">
+0.888
+</td>
+<td align="right">
+0.027
+</td>
+</tr>
+<tr>
+<td align="right">
+7
+</td>
+<td>
+doctor:Logistic_Regression
+</td>
+<td>
+abcd
+</td>
+<td align="right">
+0.875
+</td>
+<td align="right">
+0.037
+</td>
+</tr>
+<tr>
+<td align="right">
+8
+</td>
+<td>
+restraunt:SVM
+</td>
+<td>
+abcde
+</td>
+<td align="right">
+0.867
+</td>
+<td align="right">
+0.040
+</td>
+</tr>
+<tr>
+<td align="right">
+9
+</td>
+<td>
+hotel:SVM
+</td>
+<td>
+abcde
+</td>
+<td align="right">
+0.863
+</td>
+<td align="right">
+0.019
+</td>
+</tr>
+<tr>
+<td align="right">
+10
+</td>
+<td>
+restraunt:Logistic_Regression
+</td>
+<td>
+abcde
+</td>
+<td align="right">
+0.856
+</td>
+<td align="right">
+0.041
+</td>
+</tr>
+<tr>
+<td align="right">
+11
+</td>
+<td>
+doctor:SVM
+</td>
+<td>
+bcdef
+</td>
+<td align="right">
+0.831
+</td>
+<td align="right">
+0.030
+</td>
+</tr>
+<tr>
+<td align="right">
+12
+</td>
+<td>
+hotel:RBF_Network
+</td>
+<td>
+cdefg
+</td>
+<td align="right">
+0.814
+</td>
+<td align="right">
+0.019
+</td>
+</tr>
+<tr>
+<td align="right">
+13
+</td>
+<td>
+hotel:MLP
+</td>
+<td>
+defg
+</td>
+<td align="right">
+0.803
+</td>
+<td align="right">
+0.158
+</td>
+</tr>
+<tr>
+<td align="right">
+14
+</td>
+<td>
+doctor:MLP
+</td>
+<td>
+efgh
+</td>
+<td align="right">
+0.795
+</td>
+<td align="right">
+0.029
+</td>
+</tr>
+<tr>
+<td align="right">
+15
+</td>
+<td>
+hotel:C4.5
+</td>
+<td>
+fghi
+</td>
+<td align="right">
+0.770
+</td>
+<td align="right">
+0.030
+</td>
+</tr>
+<tr>
+<td align="right">
+16
+</td>
+<td>
+restraunt:5-NN
+</td>
+<td>
+fghij
+</td>
+<td align="right">
+0.765
+</td>
+<td align="right">
+0.061
+</td>
+</tr>
+<tr>
+<td align="right">
+17
+</td>
+<td>
+restraunt:MLP
+</td>
+<td>
+fghij
+</td>
+<td align="right">
+0.757
+</td>
+<td align="right">
+0.175
+</td>
+</tr>
+<tr>
+<td align="right">
+18
+</td>
+<td>
+restraunt:C4.5
+</td>
+<td>
+ghij
+</td>
+<td align="right">
+0.742
+</td>
+<td align="right">
+0.062
+</td>
+</tr>
+<tr>
+<td align="right">
+19
+</td>
+<td>
+doctor:RBF_Network
+</td>
+<td>
+hijk
+</td>
+<td align="right">
+0.721
+</td>
+<td align="right">
+0.048
+</td>
+</tr>
+<tr>
+<td align="right">
+20
+</td>
+<td>
+hotel:Logistic_Regression
+</td>
+<td>
+ijk
+</td>
+<td align="right">
+0.714
+</td>
+<td align="right">
+0.131
+</td>
+</tr>
+<tr>
+<td align="right">
+21
+</td>
+<td>
+hotel:C4.5_Original
+</td>
+<td>
+ijkl
+</td>
+<td align="right">
+0.700
+</td>
+<td align="right">
+0.033
+</td>
+</tr>
+<tr>
+<td align="right">
+22
+</td>
+<td>
+restraunt:C4.5_Original
+</td>
+<td>
+jklm
+</td>
+<td align="right">
+0.693
+</td>
+<td align="right">
+0.069
+</td>
+</tr>
+<tr>
+<td align="right">
+23
+</td>
+<td>
+doctor:C4.5
+</td>
+<td>
+klm
+</td>
+<td align="right">
+0.661
+</td>
+<td align="right">
+0.050
+</td>
+</tr>
+<tr>
+<td align="right">
+24
+</td>
+<td>
+doctor:5-NN
+</td>
+<td>
+lm
+</td>
+<td align="right">
+0.631
+</td>
+<td align="right">
+0.041
+</td>
+</tr>
+<tr>
+<td align="right">
+25
+</td>
+<td>
+hotel:5-NN
+</td>
+<td>
+lm
+</td>
+<td align="right">
+0.627
+</td>
+<td align="right">
+0.028
+</td>
+</tr>
+<tr>
+<td align="right">
+26
+</td>
+<td>
+doctor:C4.5_Original
+</td>
+<td>
+lm
+</td>
+<td align="right">
+0.626
+</td>
+<td align="right">
+0.076
+</td>
+</tr>
+<tr>
+<td align="right">
+27
+</td>
+<td>
+restraunt:RBF_Network
+</td>
+<td>
+m
+</td>
+<td align="right">
+0.623
+</td>
+<td align="right">
+0.060
+</td>
+</tr>
+&lt;a name=&gt;</a>
+</table>
+<p>But we only wanted to do it by learner. No problem…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">HSDTable</span>(df.aov,<span class="dt">which=</span><span class="st">&quot;Learner&quot;</span>)</code></pre></div>
+<!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
+<!-- Sat Oct 03 17:03:04 2015 -->
+<table border="1">
+<caption align="bottom">
+Tukey HSD Test
+</caption>
+<tr>
+<th>
+</th>
+<th>
+Learner
+</th>
+<th>
+Group
+</th>
+<th>
+AUC
+</th>
+<th>
+stdev
+</th>
+</tr>
+<tr>
+<td align="right">
+1
+</td>
+<td>
+Random_Forest_(100)
+</td>
+<td>
+a
+</td>
+<td align="right">
+0.903
+</td>
+<td align="right">
+0.025
+</td>
+</tr>
+<tr>
+<td align="right">
+2
+</td>
+<td>
+Naive_Bayes
+</td>
+<td>
+a
+</td>
+<td align="right">
+0.900
+</td>
+<td align="right">
+0.027
+</td>
+</tr>
+<tr>
+<td align="right">
+3
+</td>
+<td>
+SVM
+</td>
+<td>
+b
+</td>
+<td align="right">
+0.854
+</td>
+<td align="right">
+0.034
+</td>
+</tr>
+<tr>
+<td align="right">
+4
+</td>
+<td>
+Logistic_Regression
+</td>
+<td>
+c
+</td>
+<td align="right">
+0.815
+</td>
+<td align="right">
+0.109
+</td>
+</tr>
+<tr>
+<td align="right">
+5
+</td>
+<td>
+MLP
+</td>
+<td>
+c
+</td>
+<td align="right">
+0.785
+</td>
+<td align="right">
+0.136
+</td>
+</tr>
+<tr>
+<td align="right">
+6
+</td>
+<td>
+C4.5
+</td>
+<td>
+d
+</td>
+<td align="right">
+0.724
+</td>
+<td align="right">
+0.067
+</td>
+</tr>
+<tr>
+<td align="right">
+7
+</td>
+<td>
+RBF_Network
+</td>
+<td>
+d
+</td>
+<td align="right">
+0.719
+</td>
+<td align="right">
+0.090
+</td>
+</tr>
+<tr>
+<td align="right">
+8
+</td>
+<td>
+5-NN
+</td>
+<td>
+e
+</td>
+<td align="right">
+0.674
+</td>
+<td align="right">
+0.079
+</td>
+</tr>
+<tr>
+<td align="right">
+9
+</td>
+<td>
+C4.5_Original
+</td>
+<td>
+e
+</td>
+<td align="right">
+0.673
+</td>
+<td align="right">
+0.070
+</td>
+</tr>
+&lt;a name=&gt;</a>
+</table>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
