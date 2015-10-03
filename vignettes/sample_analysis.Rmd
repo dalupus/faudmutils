@@ -11,7 +11,7 @@ vignette: >
 
 This is a sample of how to use the **faudmutils** package.  
 We will take a sample output file from a datamining request and load it into R.  
-Then some basic statistical analysis wil be performed on the file.
+Then some basic statistical analysis will be performed on the file.
 
 First we need to load the relevant packages:
 
@@ -109,7 +109,7 @@ function from the agricolae package.
 HSD.test(df.aov,"Learner",console = TRUE)
 ```
 
-While that works it isn't very pretty, so we have done the work for you in reformating this in a presentable format
+While that works it isn't very pretty, so we have done the work for you in reformatting this in a presentable format
 with the HSDTable method from our **faudmutils* package.
 
 ```{r, results='asis'}
