@@ -4,15 +4,16 @@
 \alias{mapKeys}
 \title{Map the keys from a datarun and load them into a dataframe}
 \usage{
-mapKeys(zipfile, datafile,
+mapKeys(zipfile, datafile = "output/normal/output2.arff",
   keysheet = "https://www.dropbox.com/s/o8x5mmhjhtolkkb/feature-ranking-key.xls?dl=1")
 }
 \arguments{
 \item{zipfile}{The location of the zipped up output of the run (can be absolute or relative)}
 
-\item{datafile}{The file within the zip file which conatins the results (output/output2.arff)}
+\item{datafile}{The file within the zip file which conatins the results (default: output/output2.arff)}
 
-\item{keysheet}{The location of the keysheet to be used for mapping (can be a url or file location)}
+\item{keysheet}{The location of the keysheet to be used for mapping (can be a url or file location)
+  This will default to downloading the keysheet from the web if none is given}
 }
 \value{
 A dataframe of the results with the keys mapped to human-readable labels

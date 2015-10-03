@@ -11,4 +11,9 @@ Depends: R(>= 3.1.0)
 License: What license is it under?
 LazyData: TRUE
 Imports: XLConnect,
-    RWeka
+    RWeka,
+    agricolae,
+    xtable
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
