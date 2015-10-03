@@ -5,7 +5,7 @@
 \title{Function to automagically create tukey test tables from an anova anlysis}
 \usage{
 HSDTable(aov, which = NULL, metric = "AUC", type = "html",
-  cap = "Tukey HSD Test", label = "", digits = 3, file = "")
+  caption = "Tukey HSD Test", label = "", digits = 3, file = "")
 }
 \arguments{
 \item{aov}{Anova analysis of from \code{\link[stats]{aov}}}
@@ -16,13 +16,13 @@ HSDTable(aov, which = NULL, metric = "AUC", type = "html",
 
 \item{type}{Type of output you would like.  valid values are 'html' and 'latex'}
 
+\item{caption}{String containing the caption of the table}
+
 \item{label}{Latex label to give the table}
 
 \item{digits}{Number of significant digits to include in the table}
 
 \item{file}{The file in which to output the results ("" means it simply prints to the screen)}
-
-\item{caption}{String containing the caption of the table}
 }
 \description{
 Function to automagically create tukey test tables from an anova anlysis

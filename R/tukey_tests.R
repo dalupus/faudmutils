@@ -11,7 +11,7 @@
 #' @param label Latex label to give the table
 #' @param digits Number of significant digits to include in the table
 #' @param file The file in which to output the results ("" means it simply prints to the screen)
-HSDTable <- function(aov, which=NULL, metric="AUC",type="html",cap="Tukey HSD Test",label="",digits=3,file=""){
+HSDTable <- function(aov, which=NULL, metric="AUC",type="html",caption="Tukey HSD Test",label="",digits=3,file=""){
   if(is.null(which)){
     which = ls(df.aov$xlevels)
   }
@@ -27,5 +27,5 @@ HSDTable <- function(aov, which=NULL, metric="AUC",type="html",cap="Tukey HSD Te
   } else {
     colnames(hsd) <- c(which, 'Group', metric, 'stdev')
   }
-  print(xtable(hsd,caption=cap,label=label,digits=digits),type=type,file)
+  print(xtable(hsd,caption=caption,label=label,digits=digits),type=type,file)
 }

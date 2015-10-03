@@ -4,7 +4,7 @@ Title: A Collection of Common Data Mining Utilies
 Version: 0.1.0
 Date: 2015-10-03
 Authors@R: c(
-    person("Michael", "Crawford", email = "michaelcrawf2014@fau.edu", role = c("aut", "cre"),
+    person("Michael", "Crawford", email = "michaelcrawf2014@fau.edu", role = c("aut", "cre")),
     person("Aaron", "Richter", email = "arichter@fau.edu", role = c("aut")))
 Description: This is a collection of usefull Data Mining utilites.
     This includes wrapping many statistical analysis functions
