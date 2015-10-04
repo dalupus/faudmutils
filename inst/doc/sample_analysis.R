@@ -5,6 +5,7 @@ library(RWeka)
 suppressPackageStartupMessages(library(dplyr))
 library(xtable)
 library(agricolae)
+library(ggplot2)
 
 ## ------------------------------------------------------------------------
 zipfile <- system.file("extdata","newreview-wordvector-output.zip",package="faudmutils")
@@ -45,4 +46,10 @@ HSDTable(df.aov)
 
 ## ---- results='asis'-----------------------------------------------------
 HSDTable(df.aov,which="Learner")
+
+## ---- fig.width=7--------------------------------------------------------
+tukeyPlot(df,groupVars = "Learner")
+
+## ---- fig.height=6,fig.width=7-------------------------------------------
+tukeyPlot(df,groupVars = c("Learner","Dataset"))
 

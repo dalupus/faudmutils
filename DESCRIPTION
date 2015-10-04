@@ -15,8 +15,10 @@ LazyData: TRUE
 Imports: XLConnect,
     RWeka,
     agricolae,
+    dplyr,
+    ggplot2,
+    plyr,
     xtable,
-    dplyr
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

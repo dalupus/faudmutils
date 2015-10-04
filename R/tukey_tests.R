@@ -15,17 +15,17 @@ HSDTable <- function(aov, which=NULL, metric="AUC",type="html",caption="Tukey HS
   if(is.null(which)){
     which = ls(df.aov$xlevels)
   }
-  hsd <- HSD.test(aov,which)
+  hsd <- agricolae::HSD.test(aov,which)
   hsd.groups <- hsd$groups
   hsd.means <- hsd$means
   hsd.means$trt<-trimws(as.character(rownames(hsd.means)))
   hsd.groups$trt <- trimws(as.character(hsd.groups$trt))
-  hsd <- left_join(hsd.groups,hsd.means,by=c('trt'))
-  hsd <- select(hsd,trt,M,means,std)
+  hsd <- dplyr::left_join(hsd.groups,hsd.means,by=c('trt'))
+  hsd <- dplyr::select(hsd,trt,M,means,std)
   if(length(which) > 1) {
     colnames(hsd) <- c(paste(which, collapse = ':'), 'Group', metric, 'stdev')
   } else {
     colnames(hsd) <- c(which, 'Group', metric, 'stdev')
   }
-  print(xtable(hsd,caption=caption,label=label,digits=digits),type=type,file)
+  print(xtable::xtable(hsd,caption=caption,label=label,digits=digits),type=type,file)
 }

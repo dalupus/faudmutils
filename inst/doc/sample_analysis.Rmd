@@ -11,7 +11,7 @@ vignette: >
 
 This is a sample of how to use the **faudmutils** package.  
 We will take a sample output file from a datamining request and load it into R.  
-Then some basic statistical analysis wil be performed on the file.
+Then some basic statistical analysis will be performed on the file.
 
 First we need to load the relevant packages:
 
@@ -22,6 +22,7 @@ library(RWeka)
 suppressPackageStartupMessages(library(dplyr))
 library(xtable)
 library(agricolae)
+library(ggplot2)
 ```
 
 Now we simply take our results file and pass it into mapKeys in order to get usable dataframe of the results.
@@ -109,7 +110,7 @@ function from the agricolae package.
 HSD.test(df.aov,"Learner",console = TRUE)
 ```
 
-While that works it isn't very pretty, so we have done the work for you in reformating this in a presentable format
+While that works it isn't very pretty, so we have done the work for you in reformatting this in a presentable format
 with the HSDTable method from our **faudmutils* package.
 
 ```{r, results='asis'}
@@ -122,4 +123,16 @@ But we only wanted to do it by learner.  No problem...
 HSDTable(df.aov,which="Learner")
 ```
 
+
+Now we want to make the fake Tukey plot that everyone seems so fond of, no problem:
+
+```{r, fig.width=7}
+tukeyPlot(df,groupVars = "Learner")
+```
+
+What if we want to get really fancy and break it down by Learner and Dataset:
+
+```{r, fig.height=6,fig.width=7}
+tukeyPlot(df,groupVars = c("Learner","Dataset"))
+```
 
