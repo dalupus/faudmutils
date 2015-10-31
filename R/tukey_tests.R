@@ -27,5 +27,5 @@ HSDTable <- function(aov, which=NULL, metric="AUC",type="html",caption="Tukey HS
   } else {
     colnames(hsd) <- c(which, 'Group', metric, 'stdev')
   }
-  print(xtable::xtable(hsd,caption=caption,label=label,digits=digits),type=type,file)
+  print(xtable::xtable(hsd,caption=caption,label=label,digits=digits),type=type,file=file,comment=FALSE, include.rownames=FALSE)
 }
