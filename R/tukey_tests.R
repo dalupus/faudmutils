@@ -27,5 +27,8 @@ HSDTable <- function(aov, which=NULL, metric="AUC",type="html",caption="Tukey HS
   } else {
     colnames(hsd) <- c(which, 'Group', metric, 'stdev')
   }
+  if(!suppressWarnings(any(is.na(as.numeric(hsd[,1]))))){
+    hsd[,1] <- as.integer(hsd[,1])
+  }
   print(xtable::xtable(hsd,caption=caption,label=label,digits=digits),type=type,file=file,comment=FALSE, include.rownames=FALSE)
 }
