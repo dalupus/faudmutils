@@ -19,6 +19,7 @@ Imports: XLConnect,
     ggplot2,
     plyr,
     xtable,
+    sp,
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

@@ -129,74 +129,74 @@ sampledDF &lt;-<span class="st"> </span><span class="kw">select</span>(sampledDF
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">restraunt</td>
-<td align="left">None</td>
-<td align="left">1000</td>
-<td align="left">5-NN</td>
-<td align="right">0.775625</td>
-</tr>
-<tr class="even">
-<td align="left">restraunt</td>
-<td align="left">None</td>
-<td align="left">1000</td>
-<td align="left">MLP</td>
-<td align="right">0.876875</td>
-</tr>
-<tr class="odd">
 <td align="left">hotel</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">Random_Forest_(100)</td>
-<td align="right">0.922772</td>
+<td align="left">C4.5_Original</td>
+<td align="right">0.656293</td>
 </tr>
 <tr class="even">
 <td align="left">restraunt</td>
 <td align="left">None</td>
 <td align="left">1000</td>
 <td align="left">Naive_Bayes</td>
-<td align="right">0.909063</td>
-</tr>
-<tr class="odd">
-<td align="left">hotel</td>
-<td align="left">None</td>
-<td align="left">1000</td>
-<td align="left">C4.5</td>
-<td align="right">0.747266</td>
-</tr>
-<tr class="even">
-<td align="left">hotel</td>
-<td align="left">None</td>
-<td align="left">1000</td>
-<td align="left">Logistic_Regression</td>
-<td align="right">0.873105</td>
+<td align="right">0.883125</td>
 </tr>
 <tr class="odd">
 <td align="left">doctor</td>
 <td align="left">None</td>
 <td align="left">1000</td>
 <td align="left">SVM</td>
-<td align="right">0.839965</td>
+<td align="right">0.826408</td>
 </tr>
 <tr class="even">
 <td align="left">hotel</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">C4.5_Original</td>
-<td align="right">0.707740</td>
+<td align="left">SVM</td>
+<td align="right">0.837674</td>
+</tr>
+<tr class="odd">
+<td align="left">restraunt</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">MLP</td>
+<td align="right">0.711250</td>
+</tr>
+<tr class="even">
+<td align="left">restraunt</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">5-NN</td>
+<td align="right">0.856875</td>
 </tr>
 <tr class="odd">
 <td align="left">hotel</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">Naive_Bayes</td>
-<td align="right">0.865133</td>
+<td align="left">Logistic_Regression</td>
+<td align="right">0.632219</td>
 </tr>
 <tr class="even">
+<td align="left">restraunt</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">C4.5_Original</td>
+<td align="right">0.691563</td>
+</tr>
+<tr class="odd">
 <td align="left">hotel</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">C4.5</td>
-<td align="right">0.746224</td>
+<td align="left">RBF_Network</td>
+<td align="right">0.839207</td>
+</tr>
+<tr class="even">
+<td align="left">restraunt</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">C4.5_Original</td>
+<td align="right">0.807500</td>
 </tr>
 </tbody>
 </table>
@@ -214,7 +214,7 @@ sampledDF &lt;-<span class="st"> </span><span class="kw">select</span>(sampledDF
 <p>Well that looks ok, but what if we instead want a nice table. well we can use the <a href="https://cran.r-project.org/web/packages/xtable/xtable.pdf">xtable</a> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">xtable</span>(df.aov),<span class="dt">type=</span><span class="st">&quot;html&quot;</span>)</code></pre></div>
 <!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Sat Oct 31 14:40:15 2015 -->
+<!-- Sat Oct 31 14:46:04 2015 -->
 <table border="1">
 <tr>
 <th>
@@ -317,7 +317,7 @@ Residuals
 <p>You could even generate latex (you do use latex don’t you?) for your report.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">xtable</span>(df.aov),<span class="dt">type=</span><span class="st">&quot;latex&quot;</span>)</code></pre></div>
 <pre><code>## % latex table generated in R 3.2.2 by xtable 1.7-4 package
-## % Sat Oct 31 14:40:15 2015
+## % Sat Oct 31 14:46:04 2015
 ## \begin{table}[ht]
 ## \centering
 ## \begin{tabular}{lrrrrr}
