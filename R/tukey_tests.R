@@ -11,11 +11,12 @@
 #' @param label Latex label to give the table
 #' @param digits Number of significant digits to include in the table
 #' @param file The file in which to output the results ("" means it simply prints to the screen)
-HSDTable <- function(aov, which=NULL, metric="AUC",type="html",caption="Tukey HSD Test",label=NULL,digits=3,file=""){
+#' @param alpha Significance level
+HSDTable <- function(aov, which=NULL, metric="AUC",type="html",caption="Tukey HSD Test",label=NULL,digits=3,file="",alpha=0.05){
   if(is.null(which)){
     which = ls(df.aov$xlevels)
   }
-  hsd <- agricolae::HSD.test(aov,which)
+  hsd <- agricolae::HSD.test(aov,which,alpha = alpha)
   hsd.groups <- hsd$groups
   hsd.means <- hsd$means
   hsd.means$trt<-trimws(as.character(rownames(hsd.means)))
@@ -27,8 +28,12 @@ HSDTable <- function(aov, which=NULL, metric="AUC",type="html",caption="Tukey HS
   } else {
     colnames(hsd) <- c(which, 'Group', metric, 'stdev')
   }
+  hsd[,2]<-toupper(hsd[,2])
   if(!suppressWarnings(any(is.na(as.numeric(hsd[,1]))))){
     hsd[,1] <- as.integer(hsd[,1])
   }
-  print(xtable::xtable(hsd,caption=caption,label=label,digits=digits),type=type,file=file,comment=FALSE, include.rownames=FALSE)
+  if(type=='dataframe')
+    hsd
+  else
+    print(xtable::xtable(hsd,caption=caption,label=label,digits=digits),type=type,file=file,comment=FALSE, include.rownames=FALSE)
 }

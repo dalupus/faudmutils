@@ -10,7 +10,7 @@
 
 <meta name="author" content="Michael Crawford" />
 
-<meta name="date" content="2015-10-31" />
+<meta name="date" content="2015-11-10" />
 
 <title>Sample Data Analysis with faudmutils Package</title>
 
@@ -72,7 +72,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Sample Data Analysis with faudmutils Package</h1>
 <h4 class="author"><em>Michael Crawford</em></h4>
-<h4 class="date"><em>2015-10-31</em></h4>
+<h4 class="date"><em>2015-11-10</em></h4>
 </div>
 
 
@@ -129,32 +129,32 @@ sampledDF &lt;-<span class="st"> </span><span class="kw">select</span>(sampledDF
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">hotel</td>
+<td align="left">doctor</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">C4.5_Original</td>
-<td align="right">0.656293</td>
+<td align="left">5-NN</td>
+<td align="right">0.646479</td>
 </tr>
 <tr class="even">
-<td align="left">restraunt</td>
+<td align="left">doctor</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">Naive_Bayes</td>
-<td align="right">0.883125</td>
+<td align="left">RBF_Network</td>
+<td align="right">0.767430</td>
 </tr>
 <tr class="odd">
 <td align="left">doctor</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">SVM</td>
-<td align="right">0.826408</td>
+<td align="left">RBF_Network</td>
+<td align="right">0.759683</td>
 </tr>
 <tr class="even">
-<td align="left">hotel</td>
+<td align="left">restraunt</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">SVM</td>
-<td align="right">0.837674</td>
+<td align="left">C4.5</td>
+<td align="right">0.797813</td>
 </tr>
 <tr class="odd">
 <td align="left">restraunt</td>
@@ -164,39 +164,39 @@ sampledDF &lt;-<span class="st"> </span><span class="kw">select</span>(sampledDF
 <td align="right">0.711250</td>
 </tr>
 <tr class="even">
-<td align="left">restraunt</td>
+<td align="left">doctor</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">5-NN</td>
-<td align="right">0.856875</td>
+<td align="left">Logistic_Regression</td>
+<td align="right">0.952817</td>
 </tr>
 <tr class="odd">
+<td align="left">doctor</td>
+<td align="left">None</td>
+<td align="left">1000</td>
+<td align="left">SVM</td>
+<td align="right">0.828873</td>
+</tr>
+<tr class="even">
 <td align="left">hotel</td>
 <td align="left">None</td>
 <td align="left">1000</td>
 <td align="left">Logistic_Regression</td>
-<td align="right">0.632219</td>
-</tr>
-<tr class="even">
-<td align="left">restraunt</td>
-<td align="left">None</td>
-<td align="left">1000</td>
-<td align="left">C4.5_Original</td>
-<td align="right">0.691563</td>
+<td align="right">0.880932</td>
 </tr>
 <tr class="odd">
 <td align="left">hotel</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">RBF_Network</td>
-<td align="right">0.839207</td>
+<td align="left">C4.5</td>
+<td align="right">0.805396</td>
 </tr>
 <tr class="even">
 <td align="left">restraunt</td>
 <td align="left">None</td>
 <td align="left">1000</td>
-<td align="left">C4.5_Original</td>
-<td align="right">0.807500</td>
+<td align="left">C4.5</td>
+<td align="right">0.601875</td>
 </tr>
 </tbody>
 </table>
@@ -213,8 +213,8 @@ sampledDF &lt;-<span class="st"> </span><span class="kw">select</span>(sampledDF
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Well that looks ok, but what if we instead want a nice table. well we can use the <a href="https://cran.r-project.org/web/packages/xtable/xtable.pdf">xtable</a> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">xtable</span>(df.aov),<span class="dt">type=</span><span class="st">&quot;html&quot;</span>)</code></pre></div>
-<!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Sat Oct 31 14:46:04 2015 -->
+<!-- html table generated in R 3.2.2 by xtable 1.8-0 package -->
+<!-- Tue Nov 10 21:51:12 2015 -->
 <table border="1">
 <tr>
 <th>
@@ -316,8 +316,8 @@ Residuals
 </table>
 <p>You could even generate latex (you do use latex don’t you?) for your report.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">xtable</span>(df.aov),<span class="dt">type=</span><span class="st">&quot;latex&quot;</span>)</code></pre></div>
-<pre><code>## % latex table generated in R 3.2.2 by xtable 1.7-4 package
-## % Sat Oct 31 14:46:04 2015
+<pre><code>## % latex table generated in R 3.2.2 by xtable 1.8-0 package
+## % Tue Nov 10 21:51:12 2015
 ## \begin{table}[ht]
 ## \centering
 ## \begin{tabular}{lrrrrr}
@@ -398,7 +398,7 @@ stdev
 restraunt:Naive_Bayes
 </td>
 <td>
-a
+A
 </td>
 <td align="right">
 0.917
@@ -412,7 +412,7 @@ a
 hotel:Random_Forest_(100)
 </td>
 <td>
-a
+A
 </td>
 <td align="right">
 0.911
@@ -426,7 +426,7 @@ a
 restraunt:Random_Forest_(100)
 </td>
 <td>
-a
+A
 </td>
 <td align="right">
 0.909
@@ -440,7 +440,7 @@ a
 doctor:Naive_Bayes
 </td>
 <td>
-ab
+AB
 </td>
 <td align="right">
 0.895
@@ -454,7 +454,7 @@ ab
 hotel:Naive_Bayes
 </td>
 <td>
-abc
+ABC
 </td>
 <td align="right">
 0.889
@@ -468,7 +468,7 @@ abc
 doctor:Random_Forest_(100)
 </td>
 <td>
-abc
+ABC
 </td>
 <td align="right">
 0.888
@@ -482,7 +482,7 @@ abc
 doctor:Logistic_Regression
 </td>
 <td>
-abcd
+ABCD
 </td>
 <td align="right">
 0.875
@@ -496,7 +496,7 @@ abcd
 restraunt:SVM
 </td>
 <td>
-abcde
+ABCDE
 </td>
 <td align="right">
 0.867
@@ -510,7 +510,7 @@ abcde
 hotel:SVM
 </td>
 <td>
-abcde
+ABCDE
 </td>
 <td align="right">
 0.863
@@ -524,7 +524,7 @@ abcde
 restraunt:Logistic_Regression
 </td>
 <td>
-abcde
+ABCDE
 </td>
 <td align="right">
 0.856
@@ -538,7 +538,7 @@ abcde
 doctor:SVM
 </td>
 <td>
-bcdef
+BCDEF
 </td>
 <td align="right">
 0.831
@@ -552,7 +552,7 @@ bcdef
 hotel:RBF_Network
 </td>
 <td>
-cdefg
+CDEFG
 </td>
 <td align="right">
 0.814
@@ -566,7 +566,7 @@ cdefg
 hotel:MLP
 </td>
 <td>
-defg
+DEFG
 </td>
 <td align="right">
 0.803
@@ -580,7 +580,7 @@ defg
 doctor:MLP
 </td>
 <td>
-efgh
+EFGH
 </td>
 <td align="right">
 0.795
@@ -594,7 +594,7 @@ efgh
 hotel:C4.5
 </td>
 <td>
-fghi
+FGHI
 </td>
 <td align="right">
 0.770
@@ -608,7 +608,7 @@ fghi
 restraunt:5-NN
 </td>
 <td>
-fghij
+FGHIJ
 </td>
 <td align="right">
 0.765
@@ -622,7 +622,7 @@ fghij
 restraunt:MLP
 </td>
 <td>
-fghij
+FGHIJ
 </td>
 <td align="right">
 0.757
@@ -636,7 +636,7 @@ fghij
 restraunt:C4.5
 </td>
 <td>
-ghij
+GHIJ
 </td>
 <td align="right">
 0.742
@@ -650,7 +650,7 @@ ghij
 doctor:RBF_Network
 </td>
 <td>
-hijk
+HIJK
 </td>
 <td align="right">
 0.721
@@ -664,7 +664,7 @@ hijk
 hotel:Logistic_Regression
 </td>
 <td>
-ijk
+IJK
 </td>
 <td align="right">
 0.714
@@ -678,7 +678,7 @@ ijk
 hotel:C4.5_Original
 </td>
 <td>
-ijkl
+IJKL
 </td>
 <td align="right">
 0.700
@@ -692,7 +692,7 @@ ijkl
 restraunt:C4.5_Original
 </td>
 <td>
-jklm
+JKLM
 </td>
 <td align="right">
 0.693
@@ -706,7 +706,7 @@ jklm
 doctor:C4.5
 </td>
 <td>
-klm
+KLM
 </td>
 <td align="right">
 0.661
@@ -720,7 +720,7 @@ klm
 doctor:5-NN
 </td>
 <td>
-lm
+LM
 </td>
 <td align="right">
 0.631
@@ -734,7 +734,7 @@ lm
 hotel:5-NN
 </td>
 <td>
-lm
+LM
 </td>
 <td align="right">
 0.627
@@ -748,7 +748,7 @@ lm
 doctor:C4.5_Original
 </td>
 <td>
-lm
+LM
 </td>
 <td align="right">
 0.626
@@ -762,7 +762,7 @@ lm
 restraunt:RBF_Network
 </td>
 <td>
-m
+M
 </td>
 <td align="right">
 0.623
@@ -797,7 +797,7 @@ stdev
 Random_Forest_(100)
 </td>
 <td>
-a
+A
 </td>
 <td align="right">
 0.903
@@ -811,7 +811,7 @@ a
 Naive_Bayes
 </td>
 <td>
-a
+A
 </td>
 <td align="right">
 0.900
@@ -825,7 +825,7 @@ a
 SVM
 </td>
 <td>
-b
+B
 </td>
 <td align="right">
 0.854
@@ -839,7 +839,7 @@ b
 Logistic_Regression
 </td>
 <td>
-c
+C
 </td>
 <td align="right">
 0.815
@@ -853,7 +853,7 @@ c
 MLP
 </td>
 <td>
-c
+C
 </td>
 <td align="right">
 0.785
@@ -867,7 +867,7 @@ c
 C4.5
 </td>
 <td>
-d
+D
 </td>
 <td align="right">
 0.724
@@ -881,7 +881,7 @@ d
 RBF_Network
 </td>
 <td>
-d
+D
 </td>
 <td align="right">
 0.719
@@ -895,7 +895,7 @@ d
 5-NN
 </td>
 <td>
-e
+E
 </td>
 <td align="right">
 0.674
@@ -909,7 +909,7 @@ e
 C4.5_Original
 </td>
 <td>
-e
+E
 </td>
 <td align="right">
 0.673
